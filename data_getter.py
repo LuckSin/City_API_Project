@@ -13,10 +13,8 @@ def get_city_from_database(place: Optional[str] = None):
         CURSOR.execute(query, city_s)
     else:
         CURSOR.execute(query)
-
     city_coordinates = CURSOR.fetchall()
     if city_coordinates and place:
-
         return city_coordinates[0][0], city_coordinates[0][1]
     else:
         return city_coordinates
@@ -30,7 +28,6 @@ def get_city_coordinates_from_yandex_api(place):
         coordinates_id = coordinates_list[0]['GeoObject']['Point']['pos'].split()
         coordinates_longitude = float(coordinates_id[0])
         coordinates_latitude = float(coordinates_id[1])
-
         return coordinates_longitude, coordinates_latitude
     else:
         raise Exception(f'Unknown place {place}')
@@ -56,7 +53,7 @@ def solve_distance_formula(first_coordinates, second_coordinates):
                                         * math.cos(
         (second_place_coordinates_longitude * 3.14 / 180 - first_place_coordinates_longitude * 3.14 / 180)))
     distance = distance_between_cities * 6371.008
-    print(distance)
+
     return distance
 
 
